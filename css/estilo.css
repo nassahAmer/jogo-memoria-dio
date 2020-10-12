@@ -1,0 +1,61 @@
+* {
+    box-sizing: border-box; /* conta o tamanho do elemento somado com a borda e padding */
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    background-color: rgb(5, 190, 190);
+}
+
+.memory-game {
+    height: 640px;
+    width: 640px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+
+    perspective: 1000px; /* perspectiva de 3d */
+}
+
+.card {
+    height: calc(33.333% - 10px);
+    width: calc(25% - 10px);
+    margin: 5px;
+    position: relative;
+    box-shadow: 1px 1px 1px rgba(1, 1, 1, .3);
+    cursor: pointer;
+    transform: scale(1);
+
+    transform-style: preserve-3d; /* não deixa o elemento achatado no plano */
+    transition: transform .9s;
+}
+
+.card:active {
+    transform: scale(0.97); /* quando a classe for ativada, diminui o tamanha do card */
+    transition: transform .3s;
+}
+
+/* As duas cartas (back e front) ficarão posicionadas uma 'em cima' da outra 
+ * com javascript iremos 'virar' essas cartas
+ */
+.card-front,
+.card-back {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    position: absolute;
+    border-radius: 5px;
+    background: #ffffff;
+    backface-visibility: hidden;
+}
+
+/* Usanod rotateY para virar as cartas */
+.card-front {
+    transform: rotateY(180deg);
+}
+.card.flip {
+    transform: rotateY(180deg);
+}
